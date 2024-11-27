@@ -47,6 +47,10 @@ const postschema = new mongoose.Schema({
     type: String,
     require: true,
   },
+  status: {
+    type: String,
+    require: true,
+  },
   gender: {
     type: String,
     require: true,

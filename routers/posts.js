@@ -29,6 +29,9 @@ router.post("/post", async (req, res) => {
   if (!req.body?.Designation?.trim()) {
     validInputs.push("The Designation field is required");
   }
+  if (!req.body?.status?.trim()) {
+    validInputs.push("The status field is required");
+  }
   if (!req.body?.gender?.trim()) {
     validInputs.push("The gender field is required");
   }
@@ -51,6 +54,7 @@ router.post("/post", async (req, res) => {
       email: req.body?.email,
       mobileNo: req.body?.mobileNo,
       Designation: req.body?.Designation,
+      status: req.body?.status,
       gender: req.body?.gender,
       course: req.body?.course,
       // image: `./files/${image.name}`,
@@ -144,15 +148,18 @@ router.put("/post/:id", async (req, res) => {
   if (!req.body?.Designation?.trim()) {
     validInputs.push("The Designation field is required");
   }
+  if (!req.body?.status?.trim()) {
+    validInputs.push("The status field is required");
+  }
   if (!req.body?.gender?.trim()) {
     validInputs.push("The gender field is required");
   }
   if (!req.body?.course?.trim()) {
     validInputs.push("The course field is required");
   }
-  if (!req.files?.image) {
-    validInputs.push("The image field is required");
-  }
+  // if (!req.files?.image) {
+  //   validInputs.push("The image field is required");
+  // }
   if (validInputs?.length > 0) {
     res.status(reqStatus);
     return res.status(400).json({ status, message: validInputs });
@@ -166,6 +173,7 @@ router.put("/post/:id", async (req, res) => {
       email: req.body?.email,
       mobileNo: req.body?.mobileNo,
       Designation: req.body?.Designation,
+      status: req.body?.status,
       gender: req.body?.gender,
       course: req.body?.course,
       updated_date: moment().toDate(),
@@ -196,7 +204,8 @@ router.put("/post/:id", async (req, res) => {
       insertedId = posts?.insertedId;
     }
   } catch (error) {
-    message = error;
+    (message = error),
+      "May be the Image is Not present in the folders, try to delete the user and create new";
     console.log(error);
   }
 
